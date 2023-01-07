@@ -8,6 +8,12 @@ from scipy.spatial.transform import Rotation as R
 LINK_LEN = 100
 PI = np.pi
 
+def rotate_vector(vector, axis, radians):
+    rotation_vector = radians*axis
+    rotation = R.from_rotvec(rotation_vector)
+    rotated_vector = rotation.apply(vector)
+    return rotated_vector
+
 def get_link_coordinates(joint_angles):
     theta0 = joint_angles[0]
     theta1 = joint_angles[1]
@@ -17,6 +23,17 @@ def get_link_coordinates(joint_angles):
     theta5 = joint_angles[5]
     theta6 = joint_angles[6]
     theta7 = joint_angles[7]
+
+    axis0 = np.array([0, 1, 0])
+    axis1 = np.array([0, 0, 1])
+    axis2 = np.array([0, 1, 0])
+    axis3 = np.array([0, 0, 1])
+    axis4 = np.array([0, 1, 0])
+    axis5 = np.array([0, 0, 1])
+    axis6 = np.array([0, 1, 0])
+    axis7 = np.array([0, 0, 1])
+    axis8 = np.array([0, 1, 0])
+    
 
     joint0_pos = np.array([LINK_LEN*1, 0, 0])
     joint1_pos = np.array([LINK_LEN*2, 0, 0])
@@ -35,6 +52,7 @@ def get_link_coordinates(joint_angles):
     rotation_vector = rotation_radians*rotation_axis
     rotation = R.from_rotvec(rotation_vector)
     rotated_vector = rotation.apply(joint1_vector)
+    rotated_vector = rotate_vector(joint1_vector, rotation_axis, rotation_radians)
 
     joint1_pos = joint0_pos + rotated_vector
 
