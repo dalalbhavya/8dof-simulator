@@ -47,14 +47,7 @@ def get_link_coordinates(joint_angles):
     joint8_pos = np.array([LINK_LEN*9, 0, 0])   #End Effector
 
     joint1_vector = joint1_pos - joint0_pos
-    rotation_radians = theta0
-    rotation_axis = np.array([0,1,0])
-    rotation_vector = rotation_radians*rotation_axis
-    rotation = R.from_rotvec(rotation_vector)
-    rotated_vector = rotation.apply(joint1_vector)
-    rotated_vector = rotate_vector(joint1_vector, rotation_axis, rotation_radians)
-
-    joint1_pos = joint0_pos + rotated_vector
+    joint1_pos = joint0_pos + rotate_vector(joint1_vector, axis0, theta0)
 
     x = [0, joint0_pos[0], joint1_pos[0], joint2_pos[0], joint3_pos[0], joint4_pos[0], joint5_pos[0], joint6_pos[0], joint7_pos[0], joint8_pos[0]]
     y = [0, joint0_pos[1], joint1_pos[1], joint2_pos[1], joint3_pos[1], joint4_pos[1], joint5_pos[1], joint6_pos[1], joint7_pos[1], joint8_pos[1]]
