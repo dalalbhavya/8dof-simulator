@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d as mplot3d
 import numpy as np
 import mpl_toolkits.mplot3d.axes3d as axes3d
+from scipy.spatial.transform import Rotation as R
+
 
 LINK_LEN = 100
 PI = np.pi
@@ -16,18 +18,29 @@ def get_link_coordinates(joint_angles):
     theta6 = joint_angles[6]
     theta7 = joint_angles[7]
 
-    joint0_pos = np.array([LINK_LEN, 0, 0])
-    joint1_pos = joint0_pos + np.array([LINK_LEN*np.cos(theta0), 0, -LINK_LEN*np.sin(theta0)])
-    joint2_pos = np.array([])
-    joint3_pos = np.array([])
-    joint4_pos = np.array([])
-    joint5_pos = np.array([])
-    joint6_pos = np.array([])
-    joint7_pos = np.array([])
+    joint0_pos = np.array([LINK_LEN*1, 0, 0])
+    joint1_pos = np.array([LINK_LEN*2, 0, 0])
+    # joint1_pos = joint0_pos + np.array([LINK_LEN*np.cos(theta0), 0, -LINK_LEN*np.sin(theta0)])
+    joint2_pos = np.array([LINK_LEN*3, 0, 0])
+    joint3_pos = np.array([LINK_LEN*4, 0, 0])
+    joint4_pos = np.array([LINK_LEN*5, 0, 0])
+    joint5_pos = np.array([LINK_LEN*6, 0, 0])
+    joint6_pos = np.array([LINK_LEN*7, 0, 0])
+    joint7_pos = np.array([LINK_LEN*8, 0, 0])
+    joint8_pos = np.array([LINK_LEN*9, 0, 0])   #End Effector
 
-    x = [0, joint0_pos[0], joint1_pos[0], LINK_LEN*3, LINK_LEN*4, LINK_LEN*5, LINK_LEN*6, LINK_LEN*7, LINK_LEN*8, LINK_LEN*9]
-    y = [0, joint0_pos[1], joint1_pos[1], 0, 0, 0, 0, 0, 0, 0]
-    z = [0, joint0_pos[2], joint1_pos[2], 0, 0, 0, 0, 0, 0, 0]
+    joint1_vector = joint1_pos - joint0_pos
+    rotation_radians = theta0
+    rotation_axis = np.array([0,1,0])
+    rotation_vector = rotation_radians*rotation_axis
+    rotation = R.from_rotvec(rotation_vector)
+    rotated_vector = rotation.apply(joint1_vector)
+
+    joint1_pos = joint0_pos + rotated_vector
+
+    x = [0, joint0_pos[0], joint1_pos[0], joint2_pos[0], joint3_pos[0], joint4_pos[0], joint5_pos[0], joint6_pos[0], joint7_pos[0], joint8_pos[0]]
+    y = [0, joint0_pos[1], joint1_pos[1], joint2_pos[1], joint3_pos[1], joint4_pos[1], joint5_pos[1], joint6_pos[1], joint7_pos[1], joint8_pos[1]]
+    z = [0, joint0_pos[2], joint1_pos[2], joint2_pos[2], joint3_pos[2], joint4_pos[2], joint5_pos[2], joint6_pos[2], joint7_pos[2], joint8_pos[2]]
 
     return (x, y, z)
     
