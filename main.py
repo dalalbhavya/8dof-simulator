@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d as mplot3d
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import mpl_toolkits.mplot3d.axes3d as axes3d
 from scipy.spatial.transform import Rotation as R
@@ -33,12 +34,16 @@ def get_link_coordinates(joint_angles):
     joint7_pos = np.array([LINK_LEN*8, 0, 0])
     joint8_pos = np.array([LINK_LEN*9, 0, 0])   #End Effector
 
-    joint_pos = np.array([joint0_pos, joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint7_pos, joint8_pos])
+    joint_pos = np.array([joint0_pos, joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos])
     joint_vector = []
     for i in range(len(joint_pos)-1):
         joint_vector.append(joint_pos[i+1] - joint_pos[i])
 
     joint_vector = np.array(joint_vector)
+    print("joint_pos ", len(joint_pos))
+    print("joint_axis ", len(joint_axis))
+    print("joint_angles ", len(joint_angles))
+    print("joint_vector ", len(joint_vector))
 
     for i in range(len(joint_angles)):
         #rotate all the link vectors (joint(i+1)_pos - joint(i)_pos)
@@ -50,24 +55,21 @@ def get_link_coordinates(joint_angles):
         #rotate axis(i+1) to  axis(8)
         for k in range(i+1, len(joint_angles)):
             joint_axis[k] = rotate_vector(joint_axis[k], joint_axis[i], joint_angles[i])
-            print(joint_axis[k])
-
-    print(joint_axis) 
-
+ 
     x = [0, joint_pos[0][0], joint_pos[1][0], joint_pos[2][0], joint_pos[3][0], joint_pos[4][0], joint_pos[5][0], joint_pos[6][0], joint_pos[7][0], joint_pos[8][0]]
     y = [0, joint_pos[0][1], joint_pos[1][1], joint_pos[2][1], joint_pos[3][1], joint_pos[4][1], joint_pos[5][1], joint_pos[6][1], joint_pos[7][1], joint_pos[8][1]]
     z = [0, joint_pos[0][2], joint_pos[1][2], joint_pos[2][2], joint_pos[3][2], joint_pos[4][2], joint_pos[5][2], joint_pos[6][2], joint_pos[7][2], joint_pos[8][2]]
-
 
     return (x, y, z)
     
 def main():
     fig = plt.figure()
     ax = plt.axes(projection="3d")
+    ax.axes.set_xlim3d(left =0, right=9*LINK_LEN)
     ax.set_aspect("equal")
 
-    #TODO: #1 Implement Forward Kinematics 
-    x_line, y_line, z_line = get_link_coordinates([PI/4, PI/4, PI/4, PI/4, PI/4, PI/4, PI/4, PI/4])
+    #1 Implement Forward Kinematics 
+    x_line, y_line, z_line = get_link_coordinates([0, 0, 0, 0, 0, 0, 0, 0])
     x_line = np.array(x_line)
     y_line = np.array(y_line)
     z_line = np.array(z_line)
@@ -79,6 +81,7 @@ def main():
     
     ax.legend()
     plt.show()
+    print(x_line, y_line, z_line, sep="\n\n\n")
 
 if __name__ == "__main__":
     main()
