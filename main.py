@@ -72,7 +72,7 @@ def main():
     
     #TODO: #2 Add spherical obstacles in the form of spherical surface
 
-    for i in range(len(z_line)):
+    for i in range(len(z_line)-1):
         ax.plot(x_line[i:i+2], -z_line[i:i+2], y_line[i:i+2], label="link"+str(i))
     
     ax.legend()
