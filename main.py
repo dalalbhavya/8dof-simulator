@@ -4,7 +4,6 @@ import numpy as np
 import mpl_toolkits.mplot3d.axes3d as axes3d
 from scipy.spatial.transform import Rotation as R
 
-
 LINK_LEN = 100
 PI = np.pi
 
@@ -66,17 +65,17 @@ def main():
     ax = plt.axes(projection="3d")
     ax.set_aspect("equal")
 
-    #TODO: #1 Implement Forward Kinematics 
+    #Implement Forward Kinematics 
     x_line, y_line, z_line = get_link_coordinates([PI/4, PI/4, PI/4, PI/4, PI/4, PI/4, PI/4, PI/4])
     x_line = np.array(x_line)
     y_line = np.array(y_line)
     z_line = np.array(z_line)
     
-    #TODO: #2 Add spherical obstacles in the form of spherical surface
-
     for i in range(len(z_line)):
         ax.plot(x_line[i:i+2], -z_line[i:i+2], y_line[i:i+2], label="link"+str(i))
     
+    #TODO: #2 Add spherical obstacles in the form of spherical surface
+
     ax.legend()
     plt.show()
 
