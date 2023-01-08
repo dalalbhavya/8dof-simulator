@@ -40,10 +40,6 @@ def get_link_coordinates(joint_angles):
         joint_vector.append(joint_pos[i+1] - joint_pos[i])
 
     joint_vector = np.array(joint_vector)
-    print("joint_pos ", len(joint_pos))
-    print("joint_axis ", len(joint_axis))
-    print("joint_angles ", len(joint_angles))
-    print("joint_vector ", len(joint_vector))
 
     for i in range(len(joint_angles)):
         #rotate all the link vectors (joint(i+1)_pos - joint(i)_pos)
