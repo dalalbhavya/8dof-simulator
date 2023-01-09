@@ -90,6 +90,7 @@ def init():
 def animate(i):
     #1 Implement Forward Kinematics 
     x_line, y_line, z_line = get_link_coordinates([df.j0[i], df.j1[i], df.j2[i], df.j3[i], df.j4[i], df.j5[i], df.j6[i], df.j7[i]])
+    
     x_line = np.array(x_line)
     y_line = np.array(y_line)
     z_line = np.array(z_line)
