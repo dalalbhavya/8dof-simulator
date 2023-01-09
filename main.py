@@ -109,7 +109,7 @@ def animate(i):
     return link0, link1, link2, link3, link4, link5, link6, link7 
 
 def main():
-    #TODO: #3 Implement Forward Kinematics Animation
+    #3 Implement Forward Kinematics Animation
     anim = animation.FuncAnimation(fig, animate, frames=len(np.array(df.time)), interval= 100, blit = True)
     plt.show()
 
