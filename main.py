@@ -84,15 +84,15 @@ def get_link_coordinates(joint_angles):
 def init():
     #TODO: #2 Add spherical obstacles in the form of spherical surface
     df_env = pd.read_csv("env_config.csv")
-    print(len(df_env.obstacle_id))
-    u = np.linspace(0, 2 * np.pi, 10)
-    v = np.linspace(0, np.pi, 10)
-    x = 100 * np.outer(np.cos(u), np.sin(v))
-    y = 100 * np.outer(np.sin(u), np.sin(v))
-    z = 100 * np.outer(np.ones(np.size(u)), np.cos(v))
+    for i in range(len(df_env.obstacle_id)):
+        u = np.linspace(0, 2 * np.pi, 10)
+        v = np.linspace(0, np.pi, 10)
+        x = df_env.radius[i] * np.outer(np.cos(u), np.sin(v)) + df_env.x[i]
+        y = df_env.radius[i] * np.outer(np.sin(u), np.sin(v)) - df_env.z[i]
+        z = df_env.radius[i] * np.outer(np.ones(np.size(u)), np.cos(v)) + df_env.y[i]
 
-    # Plot the surface
-    ax.plot_surface(x, y, z, color='b')
+        # Plot the surface
+        ax.plot_surface(x, y, z, color='b')
 
     return link0, 
     
