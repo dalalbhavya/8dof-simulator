@@ -89,7 +89,7 @@ def init():
     
 def animate(i):
     #1 Implement Forward Kinematics 
-    x_line, y_line, z_line = get_link_coordinates([0, 0, 0, 0, 0, 0, 0, 0])
+    x_line, y_line, z_line = get_link_coordinates([df.j0[i], df.j1[i], df.j2[i], df.j3[i], df.j4[i], df.j5[i], df.j6[i], df.j7[i]])
     x_line = np.array(x_line)
     y_line = np.array(y_line)
     z_line = np.array(z_line)
@@ -106,8 +106,9 @@ def animate(i):
 
 def main():
     #TODO: #3 Implement Forward Kinematics Animation
-    anim = animation.FuncAnimation(fig, animate, )
+    anim = animation.FuncAnimation(fig, animate, frames=len(np.array(df.time), interval= 100, blit = True))
 
+    plt.show()
 
 if __name__ == "__main__":
     main()
