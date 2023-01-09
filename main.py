@@ -5,7 +5,9 @@ import numpy as np
 import mpl_toolkits.mplot3d.axes3d as axes3d
 from scipy.spatial.transform import Rotation as R
 import matplotlib.animation as animation
+import pandas as pd
 
+df = pd.read_csv("test_traj.csv")
 
 LINK_LEN = 100
 PI = np.pi
@@ -85,7 +87,7 @@ def init():
 
     return link0
     
-def animate():
+def animate(i):
     #1 Implement Forward Kinematics 
     x_line, y_line, z_line = get_link_coordinates([0, 0, 0, 0, 0, 0, 0, 0])
     x_line = np.array(x_line)
