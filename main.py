@@ -81,9 +81,9 @@ def get_link_coordinates(joint_angles):
 
 def init():
     joint_pos = initialize_position()
-    line.set_data(joint_pos[0], -joint_pos[2], joint_pos[1]) #add initial pose of robot
+    link0.set_data(joint_pos[0], -joint_pos[2], joint_pos[1]) #add initial pose of robot
 
-    return line
+    return link0
     
 def animate():
     #1 Implement Forward Kinematics 
