@@ -4,10 +4,17 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import mpl_toolkits.mplot3d.axes3d as axes3d
 from scipy.spatial.transform import Rotation as R
+import matplotlib.animation as animation
 
 
 LINK_LEN = 100
 PI = np.pi
+
+fig = plt.figure()
+ax = plt.axes(projection="3d")
+ax.axes.set_xlim3d(left =0, right=9*LINK_LEN)
+ax.set_aspect("equal")
+line, = ax.plot([], [], [])
 
 def rotate_vector(vector, axis, radians):
     rotation_vector = radians*axis
@@ -58,12 +65,7 @@ def get_link_coordinates(joint_angles):
 
     return (x, y, z)
     
-def main():
-    fig = plt.figure()
-    ax = plt.axes(projection="3d")
-    ax.axes.set_xlim3d(left =0, right=9*LINK_LEN)
-    ax.set_aspect("equal")
-
+def animate():
     #1 Implement Forward Kinematics 
     x_line, y_line, z_line = get_link_coordinates([0, 0, 0, 0, 0, 0, 0, 0])
     x_line = np.array(x_line)
@@ -77,7 +79,15 @@ def main():
     
     ax.legend()
     plt.show()
+
+    #TODO: #3 Implement Forward Kinematics Animation
+    anim = animation.FuncAnimation(fig,get_link_coordinates, )
+
     print(x_line, y_line, z_line, sep="\n\n\n")
+
+def main():
+    anim = animation.FuncAnimation(fig, animate, )
+
 
 if __name__ == "__main__":
     main()
