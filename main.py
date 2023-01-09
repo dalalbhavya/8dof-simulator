@@ -10,12 +10,6 @@ import matplotlib.animation as animation
 LINK_LEN = 100
 PI = np.pi
 
-fig = plt.figure()
-ax = plt.axes(projection="3d")
-ax.axes.set_xlim3d(left =0, right=9*LINK_LEN)
-ax.set_aspect("equal")
-line, = ax.plot([], [], [])
-
 def initialize_position():
     joint0_pos = np.array([LINK_LEN*1, 0, 0])
     joint1_pos = np.array([LINK_LEN*2, 0, 0])
@@ -30,6 +24,20 @@ def initialize_position():
     joint_pos = np.array([joint0_pos, joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos])
 
     return joint_pos
+
+fig = plt.figure()
+ax = plt.axes(projection="3d")
+ax.axes.set_xlim3d(left =0, right=9*LINK_LEN)
+ax.set_aspect("equal")
+joint_init_pos = initialize_position()
+link0, = ax.plot(joint_init_pos[0][:2], -joint_init_pos[2][:2], joint_init_pos[1][:2])
+link1, = ax.plot(joint_init_pos[0][1:3], -joint_init_pos[2][1:3], joint_init_pos[1][1:3])
+link2, = ax.plot(joint_init_pos[0][2:4], -joint_init_pos[2][2:4], joint_init_pos[1][2:4])
+link3, = ax.plot(joint_init_pos[0][3:5], -joint_init_pos[2][3:5], joint_init_pos[1][3:5])
+link4, = ax.plot(joint_init_pos[0][4:6], -joint_init_pos[2][4:6], joint_init_pos[1][4:6])
+link5, = ax.plot(joint_init_pos[0][5:7], -joint_init_pos[2][5:7], joint_init_pos[1][5:7])
+link6, = ax.plot(joint_init_pos[0][6:8], -joint_init_pos[2][6:8], joint_init_pos[1][6:8])
+link7, = ax.plot(joint_init_pos[0][7:], -joint_init_pos[2][7:], joint_init_pos[1][7:])
 
 def rotate_vector(vector, axis, radians):
     rotation_vector = radians*axis
@@ -91,7 +99,7 @@ def animate():
     
     ax.legend()
     plt.show()
-    
+
     print(x_line, y_line, z_line, sep="\n\n\n")
 
 def main():
