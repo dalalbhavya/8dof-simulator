@@ -96,13 +96,16 @@ def animate(i):
     
     #TODO: #2 Add spherical obstacles in the form of spherical surface
 
-    for i in range(len(z_line)-1):
-        ax.plot(x_line[i:i+2], -z_line[i:i+2], y_line[i:i+2], label="link"+str(i))
-    
-    ax.legend()
-    plt.show()
+    link0.set_data(x_line[0:2], -z_line[0:2]); link0.set_3d_properties(y_line[0:2])    
+    link1.set_data(x_line[1:3], -z_line[1:3]); link1.set_3d_properties(y_line[1:3])    
+    link2.set_data(x_line[2:4], -z_line[2:4]); link2.set_3d_properties(y_line[2:4])    
+    link3.set_data(x_line[3:5], -z_line[3:5]); link3.set_3d_properties(y_line[3:5])    
+    link4.set_data(x_line[4:6], -z_line[4:6]); link4.set_3d_properties(y_line[4:6])    
+    link5.set_data(x_line[5:7], -z_line[5:7]); link5.set_3d_properties(y_line[5:7])    
+    link6.set_data(x_line[6:8], -z_line[6:8]); link6.set_3d_properties(y_line[6:8])    
+    link7.set_data(x_line[7:], -z_line[7:]); link7.set_3d_properties(y_line[7:])
 
-    print(x_line, y_line, z_line, sep="\n\n\n")
+    return link0, link1, link2, link3, link4, link5, link6, link7 
 
 def main():
     #TODO: #3 Implement Forward Kinematics Animation
