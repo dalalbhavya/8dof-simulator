@@ -16,6 +16,7 @@ ax.axes.set_xlim3d(left =0, right=9*LINK_LEN)
 ax.set_aspect("equal")
 line, = ax.plot([], [], [])
 
+
 def rotate_vector(vector, axis, radians):
     rotation_vector = radians*axis
     rotation = R.from_rotvec(rotation_vector)
@@ -64,6 +65,9 @@ def get_link_coordinates(joint_angles):
     z = [0, joint_pos[0][2], joint_pos[1][2], joint_pos[2][2], joint_pos[3][2], joint_pos[4][2], joint_pos[5][2], joint_pos[6][2], joint_pos[7][2], joint_pos[8][2]]
 
     return (x, y, z)
+
+def init():
+    line.set_data() #add initial pose of robot
     
 def animate():
     #1 Implement Forward Kinematics 
