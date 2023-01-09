@@ -16,6 +16,20 @@ ax.axes.set_xlim3d(left =0, right=9*LINK_LEN)
 ax.set_aspect("equal")
 line, = ax.plot([], [], [])
 
+def initialize_position():
+    joint0_pos = np.array([LINK_LEN*1, 0, 0])
+    joint1_pos = np.array([LINK_LEN*2, 0, 0])
+    joint2_pos = np.array([LINK_LEN*3, 0, 0])
+    joint3_pos = np.array([LINK_LEN*4, 0, 0])
+    joint4_pos = np.array([LINK_LEN*5, 0, 0])
+    joint5_pos = np.array([LINK_LEN*6, 0, 0])
+    joint6_pos = np.array([LINK_LEN*7, 0, 0])
+    joint7_pos = np.array([LINK_LEN*8, 0, 0])
+    joint8_pos = np.array([LINK_LEN*9, 0, 0])   #End Effector
+
+    joint_pos = np.array([joint0_pos, joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos])
+
+    return joint_pos
 
 def rotate_vector(vector, axis, radians):
     rotation_vector = radians*axis
@@ -32,17 +46,7 @@ def update_joint_vectors(joint_vectors, joint_pos):
 def get_link_coordinates(joint_angles):
     joint_axis = np.array([[0., 1., 0.], [0., 0., 1.], [0., 1., 0.], [0., 0., 1.], [0., 1., 0.], [0., 0., 1.], [0., 1., 0.], [0., 0., 1.], [0., 1., 0.]])
     
-    joint0_pos = np.array([LINK_LEN*1, 0, 0])
-    joint1_pos = np.array([LINK_LEN*2, 0, 0])
-    joint2_pos = np.array([LINK_LEN*3, 0, 0])
-    joint3_pos = np.array([LINK_LEN*4, 0, 0])
-    joint4_pos = np.array([LINK_LEN*5, 0, 0])
-    joint5_pos = np.array([LINK_LEN*6, 0, 0])
-    joint6_pos = np.array([LINK_LEN*7, 0, 0])
-    joint7_pos = np.array([LINK_LEN*8, 0, 0])
-    joint8_pos = np.array([LINK_LEN*9, 0, 0])   #End Effector
-
-    joint_pos = np.array([joint0_pos, joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos])
+    joint_pos = initialize_position()
     joint_vector = []
     for i in range(len(joint_pos)-1):
         joint_vector.append(joint_pos[i+1] - joint_pos[i])
