@@ -82,10 +82,17 @@ def get_link_coordinates(joint_angles):
     return (x, y, z)
 
 def init():
-    joint_pos = initialize_position()
-    link0.set_data(joint_pos[0], -joint_pos[2], joint_pos[1]) #add initial pose of robot
+    #TODO: #2 Add spherical obstacles in the form of spherical surface
+    u = np.linspace(0, 2 * np.pi, 10)
+    v = np.linspace(0, np.pi, 10)
+    x = 100 * np.outer(np.cos(u), np.sin(v))
+    y = 100 * np.outer(np.sin(u), np.sin(v))
+    z = 100 * np.outer(np.ones(np.size(u)), np.cos(v))
 
-    return link0
+    # Plot the surface
+    ax.plot_surface(x, y, z, color='b')
+
+    return link0, 
     
 def animate(i):
     #1 Implement Forward Kinematics 
@@ -95,8 +102,6 @@ def animate(i):
     y_line = np.array(y_line)
     z_line = np.array(z_line)
     
-    #TODO: #2 Add spherical obstacles in the form of spherical surface
-
     link0.set_data(x_line[0:2], -z_line[0:2]); link0.set_3d_properties(y_line[0:2])    
     link1.set_data(x_line[1:3], -z_line[1:3]); link1.set_3d_properties(y_line[1:3])    
     link2.set_data(x_line[2:4], -z_line[2:4]); link2.set_3d_properties(y_line[2:4])    
@@ -110,7 +115,7 @@ def animate(i):
 
 def main():
     #3 Implement Forward Kinematics Animation
-    anim = animation.FuncAnimation(fig, animate, frames=len(np.array(df.time)), interval= 100, blit = True)
+    anim = animation.FuncAnimation(fig, animate, init_func=init ,frames=len(np.array(df.time)), interval= 100, blit = True)
     plt.show()
 
 if __name__ == "__main__":
