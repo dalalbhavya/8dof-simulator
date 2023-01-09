@@ -83,6 +83,7 @@ def get_link_coordinates(joint_angles):
 
 def init():
     #TODO: #2 Add spherical obstacles in the form of spherical surface
+    
     df_env = pd.read_csv("env_config.csv")
     for i in range(len(df_env.obstacle_id)):
         u = np.linspace(0, 2 * np.pi, 10)
