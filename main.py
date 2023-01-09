@@ -47,6 +47,7 @@ def get_link_coordinates(joint_angles):
     joint_axis = np.array([[0., 1., 0.], [0., 0., 1.], [0., 1., 0.], [0., 0., 1.], [0., 1., 0.], [0., 0., 1.], [0., 1., 0.], [0., 0., 1.], [0., 1., 0.]])
     
     joint_pos = initialize_position()
+
     joint_vector = []
     for i in range(len(joint_pos)-1):
         joint_vector.append(joint_pos[i+1] - joint_pos[i])
@@ -71,7 +72,8 @@ def get_link_coordinates(joint_angles):
     return (x, y, z)
 
 def init():
-    line.set_data() #add initial pose of robot
+    joint_pos = initialize_position()
+    line.set_data(joint_pos[0], -joint_pos[2], joint_pos[1]) #add initial pose of robot
     
 def animate():
     #1 Implement Forward Kinematics 
