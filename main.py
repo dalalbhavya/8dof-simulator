@@ -109,8 +109,7 @@ def animate(i):
 
 def main():
     #TODO: #3 Implement Forward Kinematics Animation
-    anim = animation.FuncAnimation(fig, animate, frames=len(np.array(df.time), interval= 100, blit = True))
-
+    anim = animation.FuncAnimation(fig, animate, frames=len(np.array(df.time)), interval= 100, blit = True)
     plt.show()
 
 if __name__ == "__main__":
