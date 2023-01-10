@@ -13,9 +13,6 @@ df = pd.read_csv("test_traj.csv")
 LINK_LEN = 100
 PI = np.pi
 
-def validate_traj(df_env, df_traj):
-    pass    
-
 def collision_check(p1, p2, center, radius):
     # Conditions for collision
     # intersection points lie between the two link ends
@@ -142,6 +139,25 @@ def animate(i):
     link7.set_data(x_line[7:], -z_line[7:]); link7.set_3d_properties(y_line[7:])
 
     return link0, link1, link2, link3, link4, link5, link6, link7 
+
+def validate_traj(df_env, df_traj):
+    #Get all the obstacle data and store them
+    obstacle = []
+    for obstacle in range(len(df_env.obstacle_id)):
+        obstacle.append(df_env.x, df_env.y, df_env.z, df_env.radius)
+
+    #Go over all the trajectory points and see if it collides
+    for instant in range(len(df_traj.time)):
+        x_line, y_line, z_line = get_link_coordinates([df.j0[instant], df.j1[instant], df.j2[instant], df.j3[instant], df.j4[instant], df.j5[instant], df.j6[instant], df.j7[instant]])
+    
+        x_line = np.array(x_line)
+        y_line = np.array(y_line)
+        z_line = np.array(z_line)
+
+        #Check for collision
+        for link in range(len(x_line)-2):
+            print(link)
+            collision_check()
 
 def main():
     #4 Check for collision free trajectory
