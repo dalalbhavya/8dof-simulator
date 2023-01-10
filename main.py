@@ -6,6 +6,7 @@ import mpl_toolkits.mplot3d.axes3d as axes3d
 from scipy.spatial.transform import Rotation as R
 import matplotlib.animation as animation
 import pandas as pd
+from skspatial.objects import Line, Sphere
 
 df = pd.read_csv("test_traj.csv")
 
@@ -16,12 +17,22 @@ def distance(p1, p2):
     return np.linalg.norm(p1-p2)
 
 def collision_check(p1, p2, center, radius):
-    #distance between p1 and center and p2 and center are both less than the radius.
-    if distance(p1, center) < radius and distance(p2, center) < radius:
-        return True
-
-    else:
-        return False
+    # Conditions for collision
+    # intersection points lie between the two link ends
+    sphere = Sphere(center, radius)
+    line = Line(p1, p2)
+    point_a = []
+    point_b = []
+    collision = False
+    try:
+        point_a, point_b = sphere.intersect_line(line)
+        #Check if the point lies between the two points given
+        
+    except:
+        collision = False
+        return collision
+        
+        
 
 def initialize_position():
     joint0_pos = np.array([LINK_LEN*1, 0, 0])
@@ -117,7 +128,7 @@ def animate(i):
     z_line = np.array(z_line)
     
     #4 Check for Collision
-    
+
 
     link0.set_data(x_line[0:2], -z_line[0:2]); link0.set_3d_properties(y_line[0:2])    
     link1.set_data(x_line[1:3], -z_line[1:3]); link1.set_3d_properties(y_line[1:3])    
