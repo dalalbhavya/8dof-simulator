@@ -12,6 +12,17 @@ df = pd.read_csv("test_traj.csv")
 LINK_LEN = 100
 PI = np.pi
 
+def distance(p1, p2):
+    return np.linalg.norm(p1-p2)
+
+def collision_check(p1, p2, center, radius):
+    #distance between p1 and center and p2 and center are both less than the radius.
+    if distance(p1, center) < radius and distance(p2, center) < radius:
+        return True
+
+    else:
+        return False
+
 def initialize_position():
     joint0_pos = np.array([LINK_LEN*1, 0, 0])
     joint1_pos = np.array([LINK_LEN*2, 0, 0])
