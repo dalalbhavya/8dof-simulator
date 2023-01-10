@@ -30,7 +30,7 @@ def collision_check(p1, p2, center, radius):
         #Check if the point lies between the two points given
         if np.inner(p1-point_a, p2-point_a) < 0 or np.inner(p1-point_b, p2-point_b) < 0:
             #intersects
-            return collision
+            return True
         else:
             #does not intersects
             return False
