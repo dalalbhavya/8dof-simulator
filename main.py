@@ -23,7 +23,6 @@ def collision_check(p1, p2, center, radius):
     line = Line(p1, p2)
     point_a = []
     point_b = []
-    collision = False
     try:
         point_a, point_b = sphere.intersect_line(line)
         point_a, point_b = np.array(point_a), np. array(point_b)
@@ -133,9 +132,6 @@ def animate(i):
     y_line = np.array(y_line)
     z_line = np.array(z_line)
     
-    #4 Check for Collision
-
-
     link0.set_data(x_line[0:2], -z_line[0:2]); link0.set_3d_properties(y_line[0:2])    
     link1.set_data(x_line[1:3], -z_line[1:3]); link1.set_3d_properties(y_line[1:3])    
     link2.set_data(x_line[2:4], -z_line[2:4]); link2.set_3d_properties(y_line[2:4])    
@@ -148,6 +144,8 @@ def animate(i):
     return link0, link1, link2, link3, link4, link5, link6, link7 
 
 def main():
+    #4 Check for collision free trajectory
+
     #3 Implement Forward Kinematics Animation
     anim = animation.FuncAnimation(fig, animate, init_func=init ,frames=len(np.array(df.time)), interval= 100, blit = True)
     plt.show()
