@@ -93,7 +93,7 @@ def get_link_coordinates(joint_angles):
     return (x, y, z)
 
 def init():
-    #TODO: #2 Add spherical obstacles in the form of spherical surface
+    #2 Add spherical obstacles in the form of spherical surface
     
     df_env = pd.read_csv("env_config.csv")
     for i in range(len(df_env.obstacle_id)):
@@ -116,6 +116,9 @@ def animate(i):
     y_line = np.array(y_line)
     z_line = np.array(z_line)
     
+    #4 Check for Collision
+    
+
     link0.set_data(x_line[0:2], -z_line[0:2]); link0.set_3d_properties(y_line[0:2])    
     link1.set_data(x_line[1:3], -z_line[1:3]); link1.set_3d_properties(y_line[1:3])    
     link2.set_data(x_line[2:4], -z_line[2:4]); link2.set_3d_properties(y_line[2:4])    
