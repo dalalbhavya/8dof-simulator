@@ -26,11 +26,17 @@ def collision_check(p1, p2, center, radius):
     collision = False
     try:
         point_a, point_b = sphere.intersect_line(line)
-        #Check if the point lies between the two points given
+        point_a, point_b = np.array(point_a), np. array(point_b)
         
+        #Check if the point lies between the two points given
+        if np.inner(p1-point_a, p2-point_a) < 0 or np.inner(p1-point_b, p2-point_b) < 0:
+            #intersects
+            return collision
+        else:
+            #does not intersects
+            return False
     except:
-        collision = False
-        return collision
+        return False
         
         
 
