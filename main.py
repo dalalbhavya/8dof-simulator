@@ -13,9 +13,6 @@ df = pd.read_csv("test_traj.csv")
 LINK_LEN = 100
 PI = np.pi
 
-def distance(p1, p2):
-    return np.linalg.norm(p1-p2)
-
 def collision_check(p1, p2, center, radius):
     # Conditions for collision
     # intersection points lie between the two link ends
