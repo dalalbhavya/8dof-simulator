@@ -13,6 +13,9 @@ df = pd.read_csv("test_traj.csv")
 LINK_LEN = 100
 PI = np.pi
 
+def validate_traj(df_env, df_traj):
+    pass    
+
 def collision_check(p1, p2, center, radius):
     # Conditions for collision
     # intersection points lie between the two link ends
@@ -142,6 +145,7 @@ def animate(i):
 
 def main():
     #4 Check for collision free trajectory
+    validate_traj(pd.read_csv("env_config.csv"), df)
 
     #3 Implement Forward Kinematics Animation
     anim = animation.FuncAnimation(fig, animate, init_func=init ,frames=len(np.array(df.time)), interval= 100, blit = True)
