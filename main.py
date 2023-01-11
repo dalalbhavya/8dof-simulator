@@ -142,9 +142,9 @@ def animate(i):
 
 def validate_traj(df_env, df_traj):
     #Get all the obstacle data and store them
-    obstacle = []
+    obstacles = []
     for obstacle in range(len(df_env.obstacle_id)):
-        obstacle.append(df_env.x, df_env.y, df_env.z, df_env.radius)
+        obstacles.append([df_env.x[obstacle], df_env.y[obstacle], df_env.z[obstacle], df_env.radius[obstacle]])
 
     #Go over all the trajectory points and see if it collides
     for instant in range(len(df_traj.time)):
@@ -155,9 +155,13 @@ def validate_traj(df_env, df_traj):
         z_line = np.array(z_line)
 
         #Check for collision
-        for link in range(len(x_line)-2):
-            print(link)
-            collision_check()
+        for i in range(len(x_line)-2):
+            p1 = np.array([x_line[i], y_line[i], z_line[i]])
+            p2 = np.array([x_line[i+1], y_line[i+1], z_line[i+1]])
+            for j in range(len(obstacles)):
+                result = collision_check(p1, p2, obstacles[j][:3], obstacles[j][3])
+                if result == True:
+                    print("Voila")
 
 def main():
     #4 Check for collision free trajectory
