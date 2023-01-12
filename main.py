@@ -1,3 +1,4 @@
+import streamlit as st
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d as mplot3d
 from mpl_toolkits.mplot3d import Axes3D
@@ -7,6 +8,7 @@ from scipy.spatial.transform import Rotation as R
 import matplotlib.animation as animation
 import pandas as pd
 from skspatial.objects import Line, Sphere
+import streamlit.components.v1 as components
 
 df = pd.read_csv("test_traj.csv")
 
@@ -169,7 +171,12 @@ def main():
 
     #3 Implement Forward Kinematics Animation
     anim = animation.FuncAnimation(fig, animate, init_func=init ,frames=len(np.array(df.time)), interval= 100, blit = True)
-    plt.show()
+    components.html(anim.to_jshtml(), height=10000)
+
+
+
+
 
 if __name__ == "__main__":
     main()
+
