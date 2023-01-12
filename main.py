@@ -173,10 +173,6 @@ def main():
     anim = animation.FuncAnimation(fig, animate, init_func=init ,frames=len(np.array(df.time)), interval= 100, blit = True)
     components.html(anim.to_jshtml(), height=10000)
 
-
-
-
-
 if __name__ == "__main__":
     main()
 
