@@ -23,13 +23,28 @@ PI = np.pi
 df = pd.read_csv(TRAJ_FILE)
 df_env = pd.read_csv(ENV_CONFIG_FILE)
 
+collision_txt = st.empty()
+
 def collision_check(p1, p2, center, radius):
+    # p1 and p2 are the ends of the line segment representing a link
     # Conditions for collision
     # intersection points lie between the two link ends
+    # returns
+    # 1 = Intersects with sphere
+    # 0 = Free Path
+    # 2 = Intersects with Wall
+    # 3 = Intersects with Wall and Sphere
+
     sphere = Sphere(center, radius)
     line = Line(p1, p2)
     point_a = []
     point_b = []
+    collision_type = 0
+
+    if p1[0] <=0 or p2[0] <=0:
+        #Link crosses/touches the wall
+        collision_type = 2
+
     try:
         point_a, point_b = sphere.intersect_line(line)
         point_a, point_b = np.array(point_a), np. array(point_b)
@@ -37,12 +52,19 @@ def collision_check(p1, p2, center, radius):
         #Check if the point lies between the two points given
         if np.inner(p1-point_a, p2-point_a) < 0 or np.inner(p1-point_b, p2-point_b) < 0:
             #intersects
-            return True
+            if collision_type == 2:
+                #Intersects both wall and sphere
+                collision_type = 3
+
+            else:
+                collision_type = 1
+            
+            return collision_type
         else:
             #does not intersects
-            return False
+            return collision_type
     except:
-        return False
+        return collision_type
         
         
 
@@ -169,8 +191,9 @@ def validate_traj(df_env, df_traj):
             p2 = np.array([x_line[i+1], y_line[i+1], z_line[i+1]])
             for j in range(len(obstacles)):
                 result = collision_check(p1, p2, obstacles[j][:3], obstacles[j][3])
-                if result == True:
-                    print("Voila")
+                if result == 0:
+                    #Collision with obstacle_id j
+                    collision_txt = st.markdown("Collision detected with :red[OBSTACLE_ID = ]" + str(df_env.obstacle_id[j]))
 
 def main():
     #4 Check for collision free trajectory
