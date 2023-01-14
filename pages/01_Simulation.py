@@ -185,15 +185,28 @@ def validate_traj(df_env, df_traj):
         y_line = np.array(y_line)
         z_line = np.array(z_line)
 
+        collision_list = []
+        wall_collision = False
+
         #Check for collision
         for i in range(len(x_line)-2):
             p1 = np.array([x_line[i], y_line[i], z_line[i]])
             p2 = np.array([x_line[i+1], y_line[i+1], z_line[i+1]])
             for j in range(len(obstacles)):
                 result = collision_check(p1, p2, obstacles[j][:3], obstacles[j][3])
-                if result == 0:
-                    #Collision with obstacle_id j
-                    collision_txt = st.markdown("Collision detected with :red[OBSTACLE_ID = ]" + str(df_env.obstacle_id[j]))
+                
+                # Collision with only spherical obstacle
+                if result == 1 and j not in collision_list:
+                    collision_list.append(int(j))
+
+                elif result == 2:
+                    wall_collision = True
+                
+                elif result == 3:
+                    wall_collision = True
+                    collision_list.append(int(j))
+        
+        
 
 def main():
     #4 Check for collision free trajectory
