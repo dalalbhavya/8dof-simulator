@@ -7,10 +7,12 @@ import pandas as pd
 from skspatial.objects import Line, Sphere
 import streamlit.components.v1 as components
 
-df = pd.read_csv("test_traj.csv")
-
+ENV_CONFIG_FILE = "data/env_config.csv"
+TRAJ_FILE = "data/test_traj.csv"
 LINK_LEN = 100
 PI = np.pi
+
+df = pd.read_csv(TRAJ_FILE)
 
 def collision_check(p1, p2, center, radius):
     # Conditions for collision
@@ -107,7 +109,7 @@ def get_link_coordinates(joint_angles):
 def init():
     #2 Add spherical obstacles in the form of spherical surface
     
-    df_env = pd.read_csv("env_config.csv")
+    df_env = pd.read_csv(ENV_CONFIG_FILE)
     for i in range(len(df_env.obstacle_id)):
         u = np.linspace(0, 2 * np.pi, 10)
         v = np.linspace(0, np.pi, 10)
@@ -164,7 +166,7 @@ def validate_traj(df_env, df_traj):
 
 def main():
     #4 Check for collision free trajectory
-    validate_traj(pd.read_csv("env_config.csv"), df)
+    validate_traj(pd.read_csv(ENV_CONFIG_FILE), df)
 
     #3 Implement Forward Kinematics Animation
     anim = animation.FuncAnimation(fig, animate, init_func=init ,frames=len(np.array(df.time)), interval= 100, blit = True)
