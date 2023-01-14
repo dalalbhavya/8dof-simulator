@@ -7,7 +7,7 @@ st.set_page_config(
 st.title("File Upload")
 
 #Add Environment File
-env_config_csv = st.file_uploader("Choose Environment CSV file")
+env_config_csv = st.file_uploader("Choose Environment CSV file", type="csv", accept_multiple_files=False)
 
 #Add Trajectory File
-traj_csv = st.file_uploader("Choose Trajectory CSV file")
+traj_csv = st.file_uploader("Choose Trajectory CSV file", type="csv", accept_multiple_files=False)
