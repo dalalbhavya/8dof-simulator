@@ -181,4 +181,12 @@ def main():
     components.html(anim.to_jshtml(), height=10000)
 
 if __name__ == "__main__":
-    main()
+    #Add Environment File
+    env_config_csv = st.file_uploader("Choose Environment CSV file", type="csv", accept_multiple_files=False)
+
+    #Add Trajectory File
+    traj_csv = st.file_uploader("Choose Trajectory CSV file", type="csv", accept_multiple_files=False)
+    
+    
+    if env_config_csv is not None and traj_csv is not None:
+        main()
