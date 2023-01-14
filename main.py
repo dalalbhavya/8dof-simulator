@@ -8,7 +8,7 @@ from skspatial.objects import Line, Sphere
 import streamlit.components.v1 as components
 
 st.set_page_config(
-    page_title="Homepage",
+    page_title="Homepage | Top Gear",
     initial_sidebar_state="expanded"
 )
 
