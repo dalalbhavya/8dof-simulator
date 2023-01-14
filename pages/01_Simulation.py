@@ -24,6 +24,7 @@ df = pd.read_csv(TRAJ_FILE)
 df_env = pd.read_csv(ENV_CONFIG_FILE)
 
 collision_txt = st.empty()
+wall_collision_txt = st.empty()
 
 def collision_check(p1, p2, center, radius):
     # p1 and p2 are the ends of the line segment representing a link
@@ -205,8 +206,17 @@ def validate_traj(df_env, df_traj):
                 elif result == 3:
                     wall_collision = True
                     collision_list.append(int(j))
-        
-        
+
+    global wall_collision_txt
+    global collision_txt
+    if wall_collision:
+        wall_collision_txt = st.markdown(":red[Wall Collision Detected!!]")
+    else:
+        wall_collision_txt = st.markdown(":green[No Wall Collision Detected]")
+
+    if len(collision_list) > 0:
+        collision_txt = st.markdown(":blue[Link collides with: ]" + str(len(collision_list)) + ":blue[ obstacle(s)]")
+
 
 def main():
     #4 Check for collision free trajectory
