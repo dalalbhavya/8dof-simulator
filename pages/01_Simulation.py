@@ -186,9 +186,22 @@ if __name__ == "__main__":
 
     #Add Trajectory File
     traj_csv = st.file_uploader("Choose Trajectory CSV file", type="csv", accept_multiple_files=False)
+
+    #File Upload status
+    status_txt = st.empty()
+    if env_config_csv is not None and traj_csv is None:
+        status_txt = st.markdown(":blue[Environment File Uploaded]")
+
+    if env_config_csv is None and traj_csv is not None:
+        status_txt = st.markdown(":blue[Trajectory File Uploaded]")
     
     
     if env_config_csv is not None and traj_csv is not None:
+        status_txt = st.markdown(":green[All Files Uploaded \nSimulating...]")
         df = pd.read_csv(traj_csv)
         df_env = pd.read_csv(env_config_csv)
         main()
+    
+    else:
+        # status_txt = st.markdown(":red[All Files Uploaded]")
+        pass
