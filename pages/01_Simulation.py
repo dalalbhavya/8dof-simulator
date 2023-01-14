@@ -13,7 +13,6 @@ st.set_page_config(
 )
 
 st.title("Main Page")
-st.sidebar.success("Select a page above.")
 
 ENV_CONFIG_FILE = "data/test_env_config.csv"
 TRAJ_FILE = "data/test_traj.csv"
