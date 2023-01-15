@@ -229,23 +229,29 @@ if __name__ == "__main__":
     #Add Input File
     input_csv = st.file_uploader("Choose Input CSV file", type="csv", accept_multiple_files=False)
     input_file_status = st.empty()
-    input_file_status = st.markdown(":red[Please upload input file containing initial and final pose]")
     if input_csv is not None:
         input_file_status = st.markdown(":green[Input File uploaded]")
+    else:
+        input_file_status = st.markdown(":red[Please upload input file containing initial and final pose]")
+
 
     #Add Environment File
     env_config_csv = st.file_uploader("Choose Environment CSV file", type="csv", accept_multiple_files=False)
     env_file_status = st.empty()
-    env_file_status = st.markdown(":red[Please upload environment file containing obstacle data]")
     if env_config_csv is not None:
         env_file_status = st.markdown(":green[Environment file uploaded]")
+    else:
+        env_file_status = st.markdown(":red[Please upload environment file containing obstacle data]")
+
 
     #Add Trajectory File
     traj_csv = st.file_uploader("Choose Trajectory CSV file", type="csv", accept_multiple_files=False)
     traj_file_status = st.empty()
-    traj_file_status = st.markdown(":red[Please upload csv file containing trajectory]")
     if traj_csv is not None:
         traj_file_status = st.markdown(":green[Trajectory file uploaded]")
+    else:
+        traj_file_status = st.markdown(":red[Please upload csv file containing trajectory]")
+
 
     #File Upload status
     status_txt = st.empty()
