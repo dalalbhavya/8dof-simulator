@@ -226,23 +226,32 @@ def main():
     components.html(anim.to_jshtml(), height=10000)
 
 if __name__ == "__main__":
+    #Add Input File
+    input_csv = st.file_uploader("Choose Input CSV file", type="csv", accept_multiple_files=False)
+    input_file_status = st.empty()
+    input_file_status = st.markdown(":red[Please upload input file containing initial and final pose]")
+    if input_csv is not None:
+        input_file_status = st.markdown(":green[Input File uploaded]")
+
     #Add Environment File
     env_config_csv = st.file_uploader("Choose Environment CSV file", type="csv", accept_multiple_files=False)
+    env_file_status = st.empty()
+    env_file_status = st.markdown(":red[Please upload environment file containing obstacle data]")
+    if env_config_csv is not None:
+        env_file_status = st.markdown(":green[Environment file uploaded]")
 
     #Add Trajectory File
     traj_csv = st.file_uploader("Choose Trajectory CSV file", type="csv", accept_multiple_files=False)
+    traj_file_status = st.empty()
+    traj_file_status = st.markdown(":red[Please upload csv file containing trajectory]")
+    if traj_csv is not None:
+        traj_file_status = st.markdown(":green[Trajectory file uploaded]")
 
     #File Upload status
     status_txt = st.empty()
-    if env_config_csv is not None and traj_csv is None:
-        status_txt = st.markdown(":blue[Environment File Uploaded]")
 
-    if env_config_csv is None and traj_csv is not None:
-        status_txt = st.markdown(":blue[Trajectory File Uploaded]")
-    
-    
-    if env_config_csv is not None and traj_csv is not None:
-        status_txt = st.markdown(":green[All Files Uploaded \nSimulating...]")
+    if env_config_csv is not None and traj_csv is not None and input_csv is not None:
+        status_txt = st.markdown(":green[All Files Uploaded. Simulating...]")
         df = pd.read_csv(traj_csv)
         df_env = pd.read_csv(env_config_csv)
         main()
