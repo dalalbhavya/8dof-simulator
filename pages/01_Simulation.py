@@ -246,7 +246,3 @@ if __name__ == "__main__":
         df = pd.read_csv(traj_csv)
         df_env = pd.read_csv(env_config_csv)
         main()
-    
-    else:
-        # status_txt = st.markdown(":red[All Files Uploaded]")
-        pass
