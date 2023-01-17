@@ -11,7 +11,11 @@
 
 
 ## Indicators and their meaning
-:red[Upload File] - Input file not uploaded.
+:red[Upload File] - Input file not uploaded/Upload unsuccessful
+:green[File Uploaded] - File Uploaded successfully
+:green[All Files Uploaded. Simulating...] - All required files uploaded files and the webapp has started simulating based on the input
+:red[Wall Collision Detected!!] - During simulation of the given trajectory and environment configuration, the links are colliding with the wall present in the YZ plane.
+:blue[Link collides with: **N** obstacle(s)] - During simulation of the given trajectory and environment configuration, the links are colliding with **N** number of obstacles while executing the trajectory.
 
 ## Formats
 
