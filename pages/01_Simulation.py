@@ -180,6 +180,21 @@ def validate_traj(df_env, df_traj):
     for obstacle in range(len(df_env.obstacle_id)):
         obstacles.append([df_env.x[obstacle], df_env.y[obstacle], df_env.z[obstacle], df_env.radius[obstacle]])
 
+    # TODO: Get all velocity and acceleration values
+    velocity_joint = [[],[],[],[],[],[],[],[]]
+    acc_joint = [[],[],[],[],[],[],[],[]]
+
+    for a in range(len(df_traj.columns) - 1):
+        for b in range(len(df_traj.time) - 1):
+            #joint a and instant b
+            velocity_joint[a].append((df_traj[df_traj.columns[a+1]][b+1] - df_traj[df_traj.columns[a+1]][b])/(df_traj.time[b+1] - df_traj.time[b]))
+
+    for a in range(len(velocity_joint)):
+        for b in range(len(velocity_joint[0]) - 1):
+            #joint a and instant b
+            acc_joint[a].append((velocity_joint[a][b+1] - velocity_joint[a][b])/(df_traj.time[b+1] - df_traj.time[b]))
+        
+
     #Go over all the trajectory points and see if it collides
     for instant in range(len(df_traj.time)):
         x_line, y_line, z_line = get_link_coordinates([df.j0[instant], df.j1[instant], df.j2[instant], df.j3[instant], df.j4[instant], df.j5[instant], df.j6[instant], df.j7[instant]])
