@@ -210,7 +210,12 @@ def validate_traj(df_env, df_traj):
     global wall_collision_txt
     global collision_txt
     global obstacle_col_txt
+
+    st.markdown("## Summary")
     
+    # Trajectory Time Taken
+    st.markdown("Flight Time: " + ":blue[" + str(df_traj.time[len(df_traj.time)-1]) + "] seconds")
+
     if wall_collision:
         wall_collision_txt = st.markdown("Wall Collision Test: :red[Failed]")
     else:
@@ -218,13 +223,12 @@ def validate_traj(df_env, df_traj):
 
     if len(collision_list) > 0:
         obstacle_col_txt = st.markdown("Obstacle Collision Test: :red[Failed]")
-        collision_txt = st.markdown(":blue[Link collides with: ]" + str(len(collision_list)) + ":blue[ obstacle(s)]")
+        collision_txt = st.markdown("Link collides with: " + str(len(collision_list)) + " obstacle(s)")
 
     else:
         obstacle_col_txt = st.markdown("Obstacle Collision Test: :green[Passed]")
 
     #Goal Reached Test
-    #Trajectory Time Taken
     #Angle Exceeding
     #Velocity Exceeding
     #Acceleration Exceeding
