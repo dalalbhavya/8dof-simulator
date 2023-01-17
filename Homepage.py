@@ -3,7 +3,7 @@ st.set_page_config(
     page_title="Top Gear",
     initial_sidebar_state="expanded"
 )
-readme_path = "README.md"
+readme_path = "README_ST.md"
 readme_file = open(readme_path, "r")
 
 while True:
