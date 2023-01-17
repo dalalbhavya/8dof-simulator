@@ -10,3 +10,8 @@
 * After successful upload of all the files, a message will be shown :green[**All Files Uploaded. Simulating...**], and after a few seconds the line diagram animation of the robotic arm could be seen.
 
 
+## Indicators and their meaning
+
+## Formats
+
+## In case of any query
