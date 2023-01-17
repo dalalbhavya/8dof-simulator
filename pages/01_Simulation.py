@@ -179,12 +179,12 @@ def animate(i):
     return link0, link1, link2, link3, link4, link5, link6, link7 
 
 def validate_traj(df_env, df_traj):
-    #Get all the obstacle data and store them
+    # Get all the obstacle data and store them
     obstacles = []
     for obstacle in range(len(df_env.obstacle_id)):
         obstacles.append([df_env.x[obstacle], df_env.y[obstacle], df_env.z[obstacle], df_env.radius[obstacle]])
 
-    # TODO: Get all velocity and acceleration values
+    # Get all velocity and acceleration values
     velocity_joint = [[],[],[],[],[],[],[],[]]
     acc_joint = [[],[],[],[],[],[],[],[]]
 
@@ -199,7 +199,7 @@ def validate_traj(df_env, df_traj):
             acc_joint[a].append((velocity_joint[a][b+1] - velocity_joint[a][b])/(df_traj.time[b+1] - df_traj.time[b]))
         
 
-    #Go over all the trajectory points and see if it collides
+    # Go over all the trajectory points and see if it collides
     for instant in range(len(df_traj.time)):
         x_line, y_line, z_line = get_link_coordinates([df.j0[instant], df.j1[instant], df.j2[instant], df.j3[instant], df.j4[instant], df.j5[instant], df.j6[instant], df.j7[instant]])
     
@@ -263,7 +263,7 @@ def validate_traj(df_env, df_traj):
     else:
         angle_exceed_txt = st.markdown("Angle limits test: :green[Passed]")
 
-    # TODO: Velocity Exceeding
+    # Velocity Exceeding
     for i in range(len(velocity_joint)):
         if max(velocity_joint[i]) > VELOCITY_MAX or min(velocity_joint[i]) < -VELOCITY_MAX:
             velocity_exceed_txt = st.markdown("Velocity limits test: :red[Failed]")
@@ -271,7 +271,7 @@ def validate_traj(df_env, df_traj):
     else:
         velocity_exceed_txt = st.markdown("Velocity limits test: :green[Passed]")
 
-    # TODO: Acceleration Exceeding
+    # Acceleration Exceeding
     for i in range(len(acc_joint)):
         if max(acc_joint[i]) > ACC_MAX or min(acc_joint[i]) < -ACC_MAX:
             acc_exceed_txt = st.markdown("Acceleration limits test: :red[Failed]")
