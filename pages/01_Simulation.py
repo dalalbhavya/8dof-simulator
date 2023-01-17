@@ -33,6 +33,7 @@ obstacle_col_txt = st.empty()
 angle_exceed_txt = st.empty()
 velocity_exceed_txt = st.empty()
 acc_exceed_txt = st.empty()
+start_point_txt = st.empty()
 
 def collision_check(p1, p2, center, radius):
     # p1 and p2 are the ends of the line segment representing a link
@@ -180,7 +181,7 @@ def animate(i):
 
     return link0, link1, link2, link3, link4, link5, link6, link7 
 
-def validate_traj(df_env, df_traj):
+def validate_traj(df_env, df_traj, df_input):
     # Get all the obstacle data and store them
     obstacles = []
     for obstacle in range(len(df_env.obstacle_id)):
@@ -236,6 +237,7 @@ def validate_traj(df_env, df_traj):
     global angle_exceed_txt
     global velocity_exceed_txt
     global acc_exceed_txt
+    global start_point_txt
 
     st.markdown("## Summary")
     
@@ -256,6 +258,15 @@ def validate_traj(df_env, df_traj):
 
 
     # TODO:Correct Start Point Test
+    for i in range(len(df_input.columns) - 1):
+        if abs(df_input[df_input.columns[i+1]][0] - df_traj[df_traj.columns[i+1]][0]) > ANGLE_MAX/100:
+            #Wrong start point
+            start_point_txt = st.markdown("Start point test: :red[Failed]")
+            break
+    else:
+        #Correct Start Point
+        start_point_txt = st.markdown("Start point test: :green[Passed]")
+
 
 
     # TODO:Goal Reached Test
@@ -287,7 +298,7 @@ def validate_traj(df_env, df_traj):
 
 def main():
     #4 Check for collision free trajectory
-    validate_traj(df_env, df)
+    validate_traj(df_env, df, df_input)
 
     #3 Implement Forward Kinematics Animation
     anim = animation.FuncAnimation(fig, animate, init_func=init ,frames=len(np.array(df.time)), interval= 100, blit = True)
