@@ -1,3 +1,8 @@
+## Contents
+1. [Using the Simulator](#using-the-simulator)
+2. [Indicators](#indicators)
+3. [Contact Us](#in-case-of-any-query)
+4. [Formats](#formats)
 ## Using the Simulator
 * To use the simulator make sure you are connected to the internet.
 * Navigate to the Simulations tab using the sidebar on the left.
@@ -8,7 +13,7 @@
 * After successful upload of all the files, a message will be shown :green[**All Files Uploaded. Simulating...**], and after a few seconds the line diagram animation of the robotic arm could be seen.
 
 
-## Indicators and their meaning
+## Indicators
 **:red[Upload File]:**  Input file not uploaded/Upload unsuccessful
 **:green[File Uploaded]:**  File Uploaded successfully
 **:green[All Files Uploaded. Simulating...]:**  All required files uploaded files and the webapp has started simulating based on the input
