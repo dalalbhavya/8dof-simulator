@@ -8,11 +8,11 @@ from skspatial.objects import Line, Sphere
 import streamlit.components.v1 as components
 
 st.set_page_config(
-    page_title="Homepage | Top Gear",
+    page_title="Simulation | Top Gear",
     initial_sidebar_state="expanded"
 )
 
-st.title("Main Page")
+st.title("Simulation")
 
 ENV_CONFIG_FILE = "data/test_env_config.csv"
 TRAJ_FILE = "data/test_traj.csv"

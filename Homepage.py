@@ -1,6 +1,6 @@
 import streamlit as st
 st.set_page_config(
-    page_title="Top Gear",
+    page_title="Homepage | Top Gear",
     initial_sidebar_state="expanded"
 )
 readme_path = "README_ST.md"
