@@ -9,9 +9,9 @@
 
 
 ## Indicators and their meaning
-:red[Upload File] - Input file not uploaded/Upload unsuccessful
-:green[File Uploaded] - File Uploaded successfully
-:green[All Files Uploaded. Simulating...] - All required files uploaded files and the webapp has started simulating based on the input
+**:red[Upload File]:**  Input file not uploaded/Upload unsuccessful
+**:green[File Uploaded]:**  File Uploaded successfully
+**:green[All Files Uploaded. Simulating...]:**  All required files uploaded files and the webapp has started simulating based on the input
 **Wall Collision Test:**  Checks for collision with the wall in YZ plane.
 **Obstacle Collision Test:**  Checks for collision with the spherical objects
 **Link collides with: **N** obstacle(s):**  The robot collides with **N** number of obstacles.
