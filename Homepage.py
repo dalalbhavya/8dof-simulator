@@ -6,6 +6,10 @@ st.set_page_config(
 readme_path = "README_ST.md"
 readme_file = open(readme_path, "r")
 
+
+st.title("Top Gear 2023")
+st.image("data/full_width.png")
+
 while True:
     line = readme_file.readline()
     st.markdown(line)
