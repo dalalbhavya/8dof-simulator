@@ -11,11 +11,17 @@
 
 
 ## Indicators and their meaning
-* Upload File - Input file not uploaded/Upload unsuccessful
-* File Uploaded - File Uploaded successfully
-* All Files Uploaded. Simulating... - All required files uploaded files and the webapp has started simulating based on the input
-* Wall Collision Detected!! - During simulation of the given trajectory and environment configuration, the links are colliding with the wall present in the YZ plane.
-* Link collides with: **N** obstacle(s) - During simulation of the given trajectory and environment configuration, the links are colliding with **N** number of obstacles while executing the trajectory.
+* **Upload File:**  Input file not uploaded/Upload unsuccessful
+* **File Uploaded:**  File Uploaded successfully
+* **All Files Uploaded. Simulating...:**  All required files uploaded files and the webapp has started simulating based on the input
+* **Wall Collision Test:**  Checks for collision with the wall in YZ plane.
+* **Obstacle Collision Test:**  Checks for collision with the spherical objects
+* **Link collides with: **N** obstacle(s):** The robot collides with **N** number of obstacles.
+* **Start point test:** Checks whether the planned path has the correct initial position or not.
+* **Goal point test:** Checks whether the planned path reaches to the goal position or not.
+* **Angle limits test:** Checks if angles are in limit specified (-PI/2 to PI/2)
+* **Velocity limits test:** Checks if velocities are in limit specified (-3 to 3) rad/s
+* **Acceleration limits test:** Checks if accelerations are in limit specified (-3 to 3) rad/(s^2)
 
 
 ## In case of any query
