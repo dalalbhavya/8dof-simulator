@@ -22,6 +22,7 @@ PI = np.pi
 ANGLE_MAX = PI/2
 VELOCITY_MAX = 3.0
 ACC_MAX = 3.0
+THRESHOLD_DISTANCE = 0.01
 
 df = pd.read_csv(TRAJ_FILE)
 df_env = pd.read_csv(ENV_CONFIG_FILE)
@@ -34,6 +35,7 @@ angle_exceed_txt = st.empty()
 velocity_exceed_txt = st.empty()
 acc_exceed_txt = st.empty()
 start_point_txt = st.empty()
+goal_point_txt = st.empty()
 
 def collision_check(p1, p2, center, radius):
     # p1 and p2 are the ends of the line segment representing a link
@@ -238,6 +240,7 @@ def validate_traj(df_env, df_traj, df_input):
     global velocity_exceed_txt
     global acc_exceed_txt
     global start_point_txt
+    global goal_point_txt
 
     st.markdown("## Summary")
     
@@ -269,7 +272,23 @@ def validate_traj(df_env, df_traj, df_input):
 
 
 
-    # TODO:Goal Reached Test
+    # Goal Reached Test
+    x_last, y_last, z_last = get_link_coordinates([df.j0[instant], df.j1[instant], df.j2[instant], df.j3[instant], df.j4[instant], df.j5[instant], df.j6[instant], df.j7[instant]])
+    x_last = np.array(x_last)
+    y_last = np.array(y_last)
+    z_last = np.array(z_last)
+
+    goal_reached = False
+    if ((x_last[-1] - df_input.j0[1])**2 + (-z_last[-1] - df_input.j1[1])**2 + (y_last[-1] - df_input.j2[1])**2) < (THRESHOLD_DISTANCE**2):
+        goal_reached = True
+
+    if goal_reached:
+        goal_point_txt = st.markdown("Goal point test: :green[Passed]")
+    else:
+        goal_point_txt = st.markdown("Goal point test: :red[Failed]")
+
+
+
 
 
     # Angle Exceeding
