@@ -19,6 +19,8 @@ TRAJ_FILE = "data/test_traj.csv"
 LINK_LEN = 100
 PI = np.pi
 ANGLE_MAX = PI/2
+VELOCITY_MAX = 3.0
+ACC_MAX = 3.0
 
 df = pd.read_csv(TRAJ_FILE)
 df_env = pd.read_csv(ENV_CONFIG_FILE)
@@ -27,6 +29,8 @@ collision_txt = st.empty()
 wall_collision_txt = st.empty()
 obstacle_col_txt = st.empty()
 angle_exceed_txt = st.empty()
+velocity_exceed_txt = st.empty()
+acc_exceed_txt = st.empty()
 
 def collision_check(p1, p2, center, radius):
     # p1 and p2 are the ends of the line segment representing a link
@@ -228,6 +232,8 @@ def validate_traj(df_env, df_traj):
     global collision_txt
     global obstacle_col_txt
     global angle_exceed_txt
+    global velocity_exceed_txt
+    global acc_exceed_txt
 
     st.markdown("## Summary")
     
@@ -257,10 +263,21 @@ def validate_traj(df_env, df_traj):
     else:
         angle_exceed_txt = st.markdown("Angle limits test: :green[Passed]")
 
-    # Velocity Exceeding
+    # TODO: Velocity Exceeding
+    for i in range(len(velocity_joint)):
+        if max(velocity_joint[i]) > VELOCITY_MAX or min(velocity_joint[i]) < -VELOCITY_MAX:
+            velocity_exceed_txt = st.markdown("Velocity limits test: :red[Failed]")
+            break
+    else:
+        velocity_exceed_txt = st.markdown("Velocity limits test: :green[Passed]")
 
-    # Acceleration Exceeding
-
+    # TODO: Acceleration Exceeding
+    for i in range(len(acc_joint)):
+        if max(acc_joint[i]) > ACC_MAX or min(acc_joint[i]) < -ACC_MAX:
+            acc_exceed_txt = st.markdown("Acceleration limits test: :red[Failed]")
+            break
+    else:
+        acc_exceed_txt = st.markdown("Acceleration limits test: :green[Passed]")
 
 def main():
     #4 Check for collision free trajectory
