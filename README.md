@@ -7,6 +7,6 @@
 * Upload the environment configuration file in the specified format.
 * Upload the csv file containing the timestamped joint angles in the specified format.
 * Individual file upload status will be updated upon successful upload.
-* After successful upload of all the files, a message will be shown :green[All Files Uploaded. Simulating...], and after a few seconds the line diagram animation of the robotic arm could be seen.
+* After successful upload of all the files, a message will be shown :green[**All Files Uploaded. Simulating...**], and after a few seconds the line diagram animation of the robotic arm could be seen.
 
 
