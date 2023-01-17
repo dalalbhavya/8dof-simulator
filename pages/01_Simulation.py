@@ -16,6 +16,7 @@ st.title("Simulation")
 
 ENV_CONFIG_FILE = "data/test_env_config.csv"
 TRAJ_FILE = "data/test_traj.csv"
+INPUT_FILE = "data/test_input.csv"
 LINK_LEN = 100
 PI = np.pi
 ANGLE_MAX = PI/2
@@ -24,6 +25,7 @@ ACC_MAX = 3.0
 
 df = pd.read_csv(TRAJ_FILE)
 df_env = pd.read_csv(ENV_CONFIG_FILE)
+df_input = pd.read_csv(INPUT_FILE)
 
 collision_txt = st.empty()
 wall_collision_txt = st.empty()
@@ -252,6 +254,10 @@ def validate_traj(df_env, df_traj):
     else:
         obstacle_col_txt = st.markdown("Obstacle Collision Test: :green[Passed]")
 
+
+    # TODO:Correct Start Point Test
+
+
     # TODO:Goal Reached Test
 
 
@@ -322,4 +328,5 @@ if __name__ == "__main__":
         status_txt = st.markdown(":green[All Files Uploaded. Simulating...]")
         df = pd.read_csv(traj_csv)
         df_env = pd.read_csv(env_config_csv)
+        df_input = pd.read_csv(input_csv)
         main()
