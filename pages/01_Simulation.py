@@ -257,7 +257,7 @@ def validate_traj(df_env, df_traj, df_input):
         obstacle_col_txt = st.markdown("Obstacle Collision Test: :green[Passed]")
 
 
-    # TODO:Correct Start Point Test
+    # Correct Start Point Test
     for i in range(len(df_input.columns) - 1):
         if abs(df_input[df_input.columns[i+1]][0] - df_traj[df_traj.columns[i+1]][0]) > ANGLE_MAX/100:
             #Wrong start point
