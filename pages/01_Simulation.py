@@ -232,7 +232,7 @@ if __name__ == "__main__":
     if input_csv is not None:
         input_file_status = st.markdown(":green[Input File uploaded]")
     else:
-        input_file_status = st.markdown(":red[Please upload input file containing initial and final pose]")
+        input_file_status = st.markdown(":red[Upload File]")
 
 
     #Add Environment File
@@ -241,7 +241,7 @@ if __name__ == "__main__":
     if env_config_csv is not None:
         env_file_status = st.markdown(":green[Environment file uploaded]")
     else:
-        env_file_status = st.markdown(":red[Please upload environment file containing obstacle data]")
+        env_file_status = st.markdown(":red[Upload File]")
 
 
     #Add Trajectory File
@@ -250,7 +250,7 @@ if __name__ == "__main__":
     if traj_csv is not None:
         traj_file_status = st.markdown(":green[Trajectory file uploaded]")
     else:
-        traj_file_status = st.markdown(":red[Please upload csv file containing trajectory]")
+        traj_file_status = st.markdown(":red[Upload File]")
 
 
     #File Upload status

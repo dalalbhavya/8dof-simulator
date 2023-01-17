@@ -11,6 +11,7 @@
 
 
 ## Indicators and their meaning
+:red[Upload File] - Input file not uploaded.
 
 ## Formats
 
