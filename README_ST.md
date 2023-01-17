@@ -17,5 +17,6 @@
 
 
 ## In case of any query
+Mail to : [IVDC Club](mailto:ivdc@iiti.ac.in)
 
 ## Formats
