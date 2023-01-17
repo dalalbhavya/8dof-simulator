@@ -18,6 +18,7 @@ ENV_CONFIG_FILE = "data/test_env_config.csv"
 TRAJ_FILE = "data/test_traj.csv"
 LINK_LEN = 100
 PI = np.pi
+ANGLE_MAX = PI/2
 
 df = pd.read_csv(TRAJ_FILE)
 df_env = pd.read_csv(ENV_CONFIG_FILE)
@@ -230,17 +231,20 @@ def validate_traj(df_env, df_traj):
     else:
         obstacle_col_txt = st.markdown("Obstacle Collision Test: :green[Passed]")
 
-    #Goal Reached Test
+    # TODO:Goal Reached Test
+
+
     # Angle Exceeding
     for i in range(len(df.columns) - 1):
-        if max(df_traj[df_traj.columns[i+1]]) > PI/4 or min(df_traj[df_traj.columns[i+1]]) < -PI/4:
+        if max(df_traj[df_traj.columns[i+1]]) > ANGLE_MAX or min(df_traj[df_traj.columns[i+1]]) < -ANGLE_MAX:
             angle_exceed_txt = st.markdown("Angle limits test: :red[Failed]")
             break
     else:
         angle_exceed_txt = st.markdown("Angle limits test: :green[Passed]")
 
-    #Velocity Exceeding
-    #Acceleration Exceeding
+    # Velocity Exceeding
+
+    # Acceleration Exceeding
 
 
 def main():
