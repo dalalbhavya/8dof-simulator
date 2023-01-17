@@ -25,6 +25,7 @@ df_env = pd.read_csv(ENV_CONFIG_FILE)
 collision_txt = st.empty()
 wall_collision_txt = st.empty()
 obstacle_col_txt = st.empty()
+angle_exceed_txt = st.empty()
 
 def collision_check(p1, p2, center, radius):
     # p1 and p2 are the ends of the line segment representing a link
@@ -210,6 +211,7 @@ def validate_traj(df_env, df_traj):
     global wall_collision_txt
     global collision_txt
     global obstacle_col_txt
+    global angle_exceed_txt
 
     st.markdown("## Summary")
     
@@ -229,7 +231,14 @@ def validate_traj(df_env, df_traj):
         obstacle_col_txt = st.markdown("Obstacle Collision Test: :green[Passed]")
 
     #Goal Reached Test
-    #Angle Exceeding
+    # Angle Exceeding
+    for i in range(len(df.columns) - 1):
+        if max(df_traj[df_traj.columns[i+1]]) > PI/4 or min(df_traj[df_traj.columns[i+1]]) < -PI/4:
+            angle_exceed_txt = st.markdown("Angle limits test: :red[Failed]")
+            break
+    else:
+        angle_exceed_txt = st.markdown("Angle limits test: :green[Passed]")
+
     #Velocity Exceeding
     #Acceleration Exceeding
 
