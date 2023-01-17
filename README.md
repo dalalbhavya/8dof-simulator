@@ -17,6 +17,7 @@
 :red[Wall Collision Detected!!] - During simulation of the given trajectory and environment configuration, the links are colliding with the wall present in the YZ plane.
 :blue[Link collides with: **N** obstacle(s)] - During simulation of the given trajectory and environment configuration, the links are colliding with **N** number of obstacles while executing the trajectory.
 
-## Formats
 
 ## In case of any query
+
+## Formats
